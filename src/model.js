@@ -16,10 +16,12 @@ export class StateMachine {
     if (!isPlainObject(flows) || !isString(initStateName)) {
       throw new Error('Invalid type for StateMachine Initialization');
     }
-    this.flows = [];
-    this.curState = initStateName;
 
     const stateNames = Object.keys(flows);
+
+    this.flows = [];
+    this.curState = stateNames.includes(initStateName) ? initStateName : '';
+
     for (const stateName of stateNames) {
       const flow = flows[stateName];
       if (!isPlainObject(flow)) {
@@ -42,6 +44,14 @@ export class StateMachine {
   }
 
   next() {
+    if (!this.curState) {
+      return this;
+    }
     return this[this.curState];
   }
+}
+
+export default {
+  StateMachine,
+  State,
 }

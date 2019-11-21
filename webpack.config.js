@@ -28,6 +28,7 @@ const config = {
     },
     extensions: ['*', '.js', '.json']
   },
+  target: 'node'
 }
 
 module.exports = config
