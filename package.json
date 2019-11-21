@@ -1,6 +1,6 @@
 {
   "name": "state-stroller",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "State Machine",
   "main": "./dist/bundle.js",
   "repository": {
@@ -21,7 +21,6 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-flow": "^6.23.0",
-    "bluebird": "^3.7.1",
     "eslint-plugin-testcafe": "^0.2.1",
     "testcafe": "^1.6.1",
     "webpack": "^4.41.2",
