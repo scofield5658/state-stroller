@@ -1,6 +1,6 @@
 {
   "name": "state-stroller",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "State Machine",
   "main": "./dist/bundle.js",
   "repository": {
@@ -10,7 +10,8 @@
   "author": "guozhi <guozhi5658@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

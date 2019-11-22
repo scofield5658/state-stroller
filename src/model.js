@@ -1,11 +1,10 @@
 import { isPlainObject, isString, isFunction } from './utils';
 
 export class State {
-  constructor({ name = '', options = {}, callback }) {
-    if (!isString(name) || !isPlainObject(options) || !(isFunction(callback) || isString(callback))) {
+  constructor({ options = {}, callback }) {
+    if (!isPlainObject(options) || !(isFunction(callback) || isString(callback))) {
       throw new Error('Invalid type for State Initialization');
     }
-    this.name = name;
     this.options = options;
     this.callback = callback;
   }
@@ -29,9 +28,9 @@ export class StateMachine {
       }
       const state = new State(flow);
       const that = this;
-      this[stateName] = async () => {
+      this[stateName] = async (...args) => {
         if (isFunction(state.callback)) {
-          const result = await state.callback(state.options);
+          const result = await state.callback(that.curState, state.options, ...args);
           that.curState = typeof result === 'string' && stateNames.includes(result) ? result : stateName;
         }
         return that;
@@ -43,11 +42,11 @@ export class StateMachine {
     return this.curState;
   }
 
-  next() {
+  next(...args) {
     if (!this.curState) {
       return this;
     }
-    return this[this.curState];
+    return this[this.curState](...args);
   }
 }
 
