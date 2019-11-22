@@ -3,7 +3,6 @@ const { StateMachine } = require('../dist/bundle');
 (function () {
   const door = new StateMachine({
     'open': {
-      name: '开门',
       options: {
         shouldCheck: true
       },
@@ -21,18 +20,15 @@ const { StateMachine } = require('../dist/bundle');
       }
     },
     'opened': {
-      name: '门已开',
       callback: 'opened',
     },
     'close': {
-      name: '关门',
-      callback: (options, peopleName) => {
+      callback: (prevState, options, peopleName) => {
         console.log(peopleName);
         return 'closed';
       }
     },
     'closed': {
-      name: '门已关',
       callback: 'closed',
     },
   }, 'closed');
